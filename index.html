@@ -2,9 +2,8 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Mini Brawl Stars - Mobile & Desktop</title>
-    <!-- Fonte Estilo Brawl Stars -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Mini Brawl Stars - Ultimate Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
     <style>
         * {
@@ -14,11 +13,11 @@
             margin: 0;
             padding: 0;
             font-family: 'Lilita One', cursive, sans-serif;
-            touch-action: manipulation;
+            touch-action: none;
         }
 
         body {
-            background-color: #0b1d3a;
+            background-color: #050b14;
             color: white;
             overflow: hidden;
             display: flex;
@@ -34,22 +33,22 @@
             height: 600px;
             max-width: 100vw;
             max-height: 100vh;
-            background: radial-gradient(circle, #1a4d8c 0%, #0a1b36 100%);
+            aspect-ratio: 16 / 9;
+            background: #0d1b2a;
             border: 4px solid #000;
-            border-radius: 16px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            box-shadow: 0 0 35px rgba(0, 0, 0, 0.9);
             overflow: hidden;
         }
 
         /* --- MENU PRINCIPAL --- */
         #main-menu {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            width: 100%; height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: linear-gradient(180deg, #186cb8 0%, #0a2d58 100%);
+            background: linear-gradient(180deg, #1d4ed8 0%, #0f172a 100%);
             z-index: 10;
         }
 
@@ -58,295 +57,185 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 15px;
-            background: rgba(0, 0, 0, 0.3);
+            background: rgba(0, 0, 0, 0.4);
             border-bottom: 3px solid #000;
         }
 
         .profile-card {
-            display: flex;
-            align-items: center;
-            background: #122138;
-            border: 3px solid #000;
-            border-radius: 12px;
-            padding: 4px 10px;
-            cursor: pointer;
+            display: flex; align-items: center;
+            background: #1e293b; border: 3px solid #000;
+            border-radius: 12px; padding: 4px 12px;
         }
-
-        .profile-avatar {
-            width: 42px;
-            height: 42px;
-            background: #ffcc00;
-            border: 2px solid #000;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 22px;
-            margin-right: 8px;
-        }
-
-        .profile-info { display: flex; flex-direction: column; }
-        .profile-name { font-size: 16px; color: #fff; text-shadow: 2px 2px #000; }
-        .profile-tag { font-size: 11px; color: #aaa; }
 
         .trophy-badge {
-            background: #e67e22;
-            border: 2px solid #000;
-            border-radius: 8px;
-            padding: 2px 8px;
-            margin-left: 10px;
-            font-size: 14px;
-            text-shadow: 1px 1px #000;
+            background: #f59e0b; border: 2px solid #000;
+            border-radius: 8px; padding: 2px 8px; margin-left: 10px;
+            font-size: 14px; text-shadow: 1px 1px #000;
         }
 
         .resources { display: flex; gap: 10px; }
         .res-box {
-            background: #0d192b;
-            border: 2px solid #000;
-            border-radius: 10px;
-            padding: 4px 10px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 15px;
-            text-shadow: 1px 1px #000;
+            background: #0f172a; border: 2px solid #000;
+            border-radius: 10px; padding: 4px 12px;
+            display: flex; align-items: center; gap: 6px; font-size: 16px;
         }
 
         .side-menu {
-            position: absolute;
-            top: 75px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            z-index: 5;
+            position: absolute; top: 70px; left: 15px;
+            display: flex; flex-direction: column; gap: 12px; z-index: 5;
         }
-
-        .side-left { left: 15px; }
-        .side-right { right: 15px; }
 
         .btn-side {
-            width: 75px;
-            height: 60px;
-            background: linear-gradient(180deg, #2980b9 0%, #1c5982 100%);
-            border: 3px solid #000;
-            border-radius: 12px;
+            width: 85px; height: 65px;
+            background: linear-gradient(180deg, #3b82f6 0%, #1d4ed8 100%);
+            border: 3px solid #000; border-radius: 12px;
             box-shadow: 0 4px 0 #000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
+            display: flex; flex-direction: column;
+            justify-content: center; align-items: center;
+            cursor: pointer; font-size: 12px;
         }
 
-        .center-brawler-display {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
+        .btn-side:active { transform: translateY(3px); box-shadow: 0 1px 0 #000; }
+
+        .center-display {
+            display: flex; flex-direction: column;
+            align-items: center; justify-content: center; margin-top: 10px;
         }
 
-        #brawler-preview-canvas { width: 160px; height: 160px; }
+        #preview-canvas { width: 170px; height: 170px; }
 
         .bottom-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            padding: 15px;
-            background: rgba(0, 0, 0, 0.4);
-            border-top: 3px solid #000;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            padding: 15px; background: rgba(0, 0, 0, 0.4); border-top: 3px solid #000;
         }
 
-        .mode-selector {
-            width: 260px;
-            height: 60px;
-            background: linear-gradient(180deg, #34495e 0%, #2c3e50 100%);
-            border: 3px solid #000;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            padding: 0 10px;
-            cursor: pointer;
-            gap: 10px;
+        .mode-card {
+            width: 250px; height: 65px;
+            background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+            border: 3px solid #000; border-radius: 12px;
+            display: flex; align-items: center; padding: 0 12px; gap: 12px;
         }
 
         .btn-play {
-            width: 180px;
-            height: 65px;
-            background: linear-gradient(180deg, #2ecc71 0%, #27ae60 100%);
-            border: 4px solid #000;
-            border-radius: 16px;
-            box-shadow: 0 6px 0 #000;
-            font-size: 26px;
-            color: #fff;
-            text-shadow: 2px 2px #000;
-            cursor: pointer;
+            width: 200px; height: 70px;
+            background: linear-gradient(180deg, #22c55e 0%, #15803d 100%);
+            border: 4px solid #000; border-radius: 16px;
+            box-shadow: 0 6px 0 #000; font-size: 28px; color: #fff;
+            text-shadow: 2px 2px #000; cursor: pointer;
         }
 
         /* --- MODAIS --- */
         .modal-overlay {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.85);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.85); display: none;
+            justify-content: center; align-items: center; z-index: 100;
         }
 
         .modal-box {
-            width: 90%;
-            max-width: 650px;
-            background: #1a2a40;
-            border: 4px solid #000;
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            width: 90%; max-width: 750px; height: 460px;
+            background: #1e293b; border: 4px solid #000;
+            border-radius: 16px; padding: 20px;
+            display: flex; flex-direction: column; position: relative;
         }
 
         .modal-close {
-            position: absolute;
-            top: 10px; right: 15px;
-            background: #e74c3c;
-            border: 2px solid #000;
-            border-radius: 8px;
-            color: white;
-            padding: 4px 12px;
-            cursor: pointer;
+            position: absolute; top: 10px; right: 15px;
+            background: #ef4444; border: 2px solid #000;
+            border-radius: 8px; color: white; padding: 4px 12px; cursor: pointer;
         }
 
-        .brawlers-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 15px;
-            max-height: 300px;
-            overflow-y: auto;
+        .shop-tabs { display: flex; gap: 10px; margin-bottom: 15px; }
+        .tab-btn {
+            padding: 8px 16px; background: #334155; border: 2px solid #000;
+            border-radius: 8px; color: white; cursor: pointer;
+        }
+        .tab-btn.active { background: #3b82f6; }
+
+        .grid-container {
+            display: grid; grid-template-columns: repeat(3, 1fr);
+            gap: 12px; overflow-y: auto; padding-right: 5px; flex: 1;
         }
 
-        .brawler-card {
-            background: #2c3e50;
-            border: 3px solid #000;
-            border-radius: 12px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
+        .card-item {
+            background: #0f172a; border: 3px solid #000; border-radius: 12px;
+            padding: 10px; display: flex; flex-direction: column; align-items: center;
+            justify-content: space-between; text-align: center;
         }
 
-        .brawler-card.selected { border-color: #f1c40f; box-shadow: 0 0 10px #f1c40f; }
+        .card-item.selected { border-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
 
-        /* Raridades */
-        .rarity-tag { font-size: 10px; padding: 2px 6px; border-radius: 4px; border: 1px solid #000; text-transform: uppercase; margin-top: 4px; }
-        .rare { background-color: #2ecc71; color: #000; }
-        .super-rare { background-color: #3498db; color: #fff; }
-        .epic { background-color: #9b59b6; color: #fff; }
-        .mythic { background-color: #e74c3c; color: #fff; }
-        .legendary { background-color: #f1c40f; color: #000; }
-        .ultra-legendary { background: linear-gradient(45deg, #ff007f, #00f0ff); color: #fff; }
-
-        /* --- CANVAS E CONTROLES DE JOGO --- */
-        #game-canvas { display: none; width: 100%; height: 100%; background-color: #27ae60; }
-
-        .hud-overlay {
-            position: absolute;
-            top: 10px; left: 10px;
-            display: none;
-            gap: 10px;
-            z-index: 15;
+        .btn-buy {
+            background: #22c55e; border: 2px solid #000; color: white;
+            padding: 6px 12px; border-radius: 8px; cursor: pointer;
+            font-size: 14px; width: 100%; margin-top: 5px;
         }
+        .btn-buy.disabled { background: #64748b; cursor: not-allowed; }
 
-        .hud-card {
-            background: rgba(0,0,0,0.6);
-            border: 2px solid #000;
-            border-radius: 8px;
-            padding: 6px 12px;
-            font-size: 14px;
-        }
+        /* --- CANVAS DE JOGO E CONTROLES TOUCH --- */
+        #game-canvas { display: none; width: 100%; height: 100%; background: #2e7d32; }
 
-        /* CONTROLES TOUCH (MOBILE) */
-        #touch-controls {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
+        .hud-top {
+            position: absolute; top: 10px; width: 100%;
+            display: none; justify-content: center; gap: 20px; z-index: 15;
             pointer-events: none;
-            display: none;
-            z-index: 20;
         }
 
-        #joystick-area {
-            position: absolute;
-            bottom: 20px; left: 20px;
-            width: 150px; height: 150px;
-            pointer-events: auto;
+        .team-score {
+            background: rgba(0,0,0,0.7); border: 3px solid #000;
+            border-radius: 10px; padding: 6px 16px; font-size: 18px;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        #countdown-box {
+            position: absolute; top: 60px; left: 50%; transform: translateX(-50%);
+            background: #ef4444; border: 3px solid #000; border-radius: 10px;
+            padding: 6px 20px; font-size: 22px; display: none; z-index: 15;
+            animation: pulse 0.6s infinite alternate;
+        }
+
+        /* D-PAD / TOUCH MOBILE */
+        #touch-overlay {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; z-index: 20; pointer-events: none;
+        }
+
+        #joystick-zone {
+            position: absolute; bottom: 20px; left: 20px;
+            width: 140px; height: 140px; pointer-events: auto;
         }
 
         #joystick-base {
-            width: 130px; height: 130px;
-            background: rgba(0, 0, 0, 0.4);
-            border: 3px solid rgba(255, 255, 255, 0.5);
-            border-radius: 50%;
-            position: absolute;
-            top: 10px; left: 10px;
+            width: 120px; height: 120px; background: rgba(0,0,0,0.4);
+            border: 3px solid rgba(255,255,255,0.6); border-radius: 50%;
+            position: absolute; top: 10px; left: 10px;
         }
 
-        #joystick-knob {
-            width: 55px; height: 55px;
-            background: rgba(255, 255, 255, 0.8);
-            border: 3px solid #000;
-            border-radius: 50%;
-            position: absolute;
-            top: 47px; left: 47px;
+        #joystick-stick {
+            width: 50px; height: 50px; background: rgba(255,255,255,0.9);
+            border: 3px solid #000; border-radius: 50%;
+            position: absolute; top: 45px; left: 45px;
         }
 
-        .touch-btn {
-            position: absolute;
-            pointer-events: auto;
-            border-radius: 50%;
-            border: 4px solid #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 26px;
-            box-shadow: 0 4px 0 #000;
+        .action-btn {
+            position: absolute; pointer-events: auto; border-radius: 50%;
+            border: 4px solid #000; display: flex; justify-content: center;
+            align-items: center; font-size: 28px; box-shadow: 0 4px 0 #000;
         }
 
-        .touch-btn:active { transform: scale(0.92); }
-
-        #btn-attack {
-            bottom: 30px; right: 30px;
-            width: 80px; height: 80px;
-            background: linear-gradient(180deg, #e74c3c 0%, #c0392b 100%);
+        #btn-shoot {
+            bottom: 25px; right: 25px; width: 85px; height: 85px;
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
         }
 
-        #btn-super {
-            bottom: 120px; right: 45px;
-            width: 65px; height: 65px;
-            background: linear-gradient(180deg, #f1c40f 0%, #f39c12 100%);
+        #btn-super-touch {
+            bottom: 125px; right: 40px; width: 70px; height: 70px;
+            background: linear-gradient(180deg, #eab308 0%, #ca8a04 100%);
             opacity: 0.4;
         }
 
-        #btn-super.ready {
-            opacity: 1.0;
-            animation: pulse 0.8s infinite alternate;
-        }
+        #btn-super-touch.ready { opacity: 1.0; animation: pulse 0.8s infinite alternate; }
 
-        @keyframes pulse {
-            from { transform: scale(1); }
-            to { transform: scale(1.1); }
-        }
-
-        .btn-action {
-            background: #27ae60;
-            border: 2px solid #000;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 18px;
-        }
+        @keyframes pulse { from { transform: scale(1); } to { transform: scale(1.1); } }
     </style>
 </head>
 <body>
@@ -356,38 +245,36 @@
     <div id="main-menu">
         <div class="top-bar">
             <div class="profile-card">
-                <div class="profile-avatar">🤠</div>
-                <div class="profile-info">
-                    <span class="profile-name" id="menu-name">Jogador</span>
-                    <span class="profile-tag">#PLAYER123</span>
+                <div style="font-size:24px; margin-right:8px;">🤠</div>
+                <div>
+                    <div style="font-size:15px;" id="menu-nick">Jogador</div>
+                    <div class="trophy-badge">🏆 <span id="menu-trophies">0</span></div>
                 </div>
-                <div class="trophy-badge">🏆 <span id="menu-trophies">0</span></div>
             </div>
 
             <div class="resources">
-                <div class="res-box">🪙 <span id="menu-coins">100</span></div>
-                <div class="res-box">💎 <span id="menu-gems">10</span></div>
+                <div class="res-box">🪙 <span id="menu-coins">0</span></div>
+                <div class="res-box">💎 <span id="menu-gems">0</span></div>
             </div>
         </div>
 
-        <!-- Botões Esquerda -->
-        <div class="side-menu side-left">
-            <div class="btn-side" onclick="openModal('brawlers-modal')">🥊<span>BRAWLERS</span></div>
+        <div class="side-menu">
+            <div class="btn-side" onclick="openModal('shop-modal')">🛒<span style="margin-top:2px;">LOJA</span></div>
+            <div class="btn-side" onclick="openModal('brawlers-modal')">🥊<span style="margin-top:2px;">BRAWLERS</span></div>
         </div>
 
-        <!-- Exibição Central -->
-        <div class="center-brawler-display">
-            <canvas id="brawler-preview-canvas"></canvas>
-            <h2 id="equipped-brawler-name" style="text-shadow: 2px 2px #000;">SHELLY</h2>
+        <div class="center-display">
+            <canvas id="preview-canvas"></canvas>
+            <h2 id="equipped-name" style="text-shadow: 2px 2px #000; margin-top:5px;">SHELLY</h2>
+            <span id="equipped-skin-name" style="font-size:12px; color:#aaa;">Padrão</span>
         </div>
 
-        <!-- Barra Inferior -->
         <div class="bottom-bar">
-            <div class="mode-selector">
-                <span style="font-size: 30px;">💎</span>
+            <div class="mode-card">
+                <span style="font-size:32px;">💎</span>
                 <div>
-                    <div style="font-size: 16px;">PIQUE-GEMA</div>
-                    <div style="font-size: 11px; color: #ccc;">Sobreviva e Vença</div>
+                    <div style="font-size:16px;">PIQUE-GEMA</div>
+                    <div style="font-size:11px; color:#cbd5e1;">3v3 • Pegue 10 Gemas</div>
                 </div>
             </div>
 
@@ -395,46 +282,62 @@
         </div>
     </div>
 
-    <!-- MODAL BRAWLERS -->
+    <!-- MODAL LOJA -->
+    <div class="modal-overlay" id="shop-modal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeModal('shop-modal')">X</button>
+            <h2>LOJA DE BRAWLERS E SKINS</h2>
+            <div class="shop-tabs">
+                <button class="tab-btn active" id="tab-brawlers-btn" onclick="switchShopTab('brawlers')">Brawlers</button>
+                <button class="tab-btn" id="tab-skins-btn" onclick="switchShopTab('skins')">Skins</button>
+            </div>
+            <div class="grid-container" id="shop-grid"></div>
+        </div>
+    </div>
+
+    <!-- MODAL SELEÇÃO DE BRAWLERS -->
     <div class="modal-overlay" id="brawlers-modal">
         <div class="modal-box">
             <button class="modal-close" onclick="closeModal('brawlers-modal')">X</button>
-            <h2>SELECIONE SEU BRAWLER</h2>
-            <div class="brawlers-grid" id="brawlers-list"></div>
+            <h2>SEUS BRAWLERS</h2>
+            <div class="grid-container" id="brawlers-grid" style="margin-top:15px;"></div>
         </div>
     </div>
 
-    <!-- MODAL FIM DE JOGO (TROFÉUS E GEMAS) -->
+    <!-- MODAL FIM DE JOGO -->
     <div class="modal-overlay" id="game-over-modal">
-        <div class="modal-box" style="text-align: center; align-items: center;">
-            <h1 id="end-title" style="font-size: 36px; margin-bottom: 10px;">VITÓRIA!</h1>
-            <div style="font-size: 50px; margin: 10px 0;" id="end-icon">🏆</div>
-            <div style="display: flex; gap: 20px; font-size: 22px; margin-bottom: 20px;">
+        <div class="modal-box" style="width:400px; height:320px; align-items:center; text-align:center;">
+            <h1 id="end-title" style="font-size:36px; margin-top:10px;">VITÓRIA!</h1>
+            <div style="font-size:50px; margin:10px 0;" id="end-icon">🏆</div>
+            <div style="display:flex; gap:20px; font-size:20px; margin-bottom:15px;">
                 <div>🏆 <span id="reward-trophies">+8</span></div>
                 <div>💎 <span id="reward-gems">+5</span></div>
-                <div>🪙 <span id="reward-coins">+25</span></div>
+                <div>🪙 <span id="reward-coins">+30</span></div>
             </div>
-            <button class="btn-action" style="width: 80%;" onclick="closeModal('game-over-modal'); exitGame();">CONTINUAR</button>
+            <button class="btn-buy" style="font-size:18px; padding:10px;" onclick="closeModal('game-over-modal'); exitGame();">CONTINUAR</button>
         </div>
     </div>
 
-    <!-- CANVAS DE JOGO -->
+    <!-- HUD DE PIQUE-GEMA -->
+    <div class="hud-top" id="game-hud">
+        <div class="team-score" style="border-color:#3b82f6;">🔵 AZUL: <span id="score-blue">0</span>/10 💎</div>
+        <div class="team-score" style="border-color:#ef4444;">🔴 VERMELHO: <span id="score-red">0</span>/10 💎</div>
+        <button class="modal-close" style="position:static;" onclick="exitGame()">SAIR</button>
+    </div>
+
+    <div id="countdown-box">VITÓRIA EM <span id="count-sec">15</span>s!</div>
+
+    <!-- CANVAS DO JOGO -->
     <canvas id="game-canvas" width="1000" height="600"></canvas>
-    
-    <!-- HUD DE BRAWL -->
-    <div class="hud-overlay" id="game-hud">
-        <div class="hud-card">👥 Vivos: <span id="hud-alive">6</span></div>
-        <button class="modal-close" style="position: static;" onclick="exitGame()">SAIR</button>
-    </div>
 
-    <!-- CONTROLES MOBILE (TOUCH) -->
-    <div id="touch-controls">
-        <div id="joystick-area">
+    <!-- CONTROLES OVERLAY MOBILE -->
+    <div id="touch-overlay">
+        <div id="joystick-zone">
             <div id="joystick-base"></div>
-            <div id="joystick-knob"></div>
+            <div id="joystick-stick"></div>
         </div>
-        <div class="touch-btn" id="btn-attack">💥</div>
-        <div class="touch-btn" id="btn-super">⚡</div>
+        <div class="action-btn" id="btn-shoot">💥</div>
+        <div class="action-btn" id="btn-super-touch">⚡</div>
     </div>
 </div>
 
@@ -442,174 +345,275 @@
 // --- BANCO DE DADOS DOS BRAWLERS ---
 const BRAWLERS = {
     shelly: {
-        id: 'shelly', name: 'Shelly', rarity: 'rare', color: '#8e44ad',
-        hp: 1200, speed: 3.8, aimType: 'cone', range: 180, reloadSpeed: 50,
-        attackDmg: 180, superDmg: 450
+        id: 'shelly', name: 'Shelly', price: 0, currency: 'free',
+        hp: 1300, speed: 3.8, type: 'spread', reload: 45, attackDmg: 180, bullets: 5,
+        color: '#8e44ad', desc: 'Espingarda em cone. Super destrói paredes!'
     },
     colt: {
-        id: 'colt', name: 'Colt', rarity: 'super-rare', color: '#e67e22',
-        hp: 850, speed: 4.2, aimType: 'line', range: 280, reloadSpeed: 40,
-        attackDmg: 140, superDmg: 350
+        id: 'colt', name: 'Colt', price: 500, currency: 'coins',
+        hp: 900, speed: 4.2, type: 'salvo', reload: 38, attackDmg: 130, bullets: 6,
+        color: '#e67e22', desc: 'Ráfaga rápida de projéteis em linha reta.'
     },
-    spike: {
-        id: 'spike', name: 'Spike', rarity: 'legendary', color: '#2ecc71',
-        hp: 750, speed: 3.6, aimType: 'line', range: 220, reloadSpeed: 50,
-        attackDmg: 250, superDmg: 500
+    primo: {
+        id: 'primo', name: 'El Primo', price: 800, currency: 'coins',
+        hp: 1800, speed: 4.0, type: 'melee', reload: 32, attackDmg: 260, bullets: 4,
+        color: '#27ae60', desc: 'Socos de perto. Super: Salta e esmaga a área!'
     },
-    chronos: {
-        id: 'chronos', name: 'Chronos', rarity: 'ultra-legendary', color: '#00f0ff',
-        hp: 1400, speed: 4.5, aimType: 'line', range: 320, reloadSpeed: 30,
-        attackDmg: 350, superDmg: 700
+    barley: {
+        id: 'barley', name: 'Barley', price: 150, currency: 'gems',
+        hp: 850, speed: 3.6, type: 'thrower', reload: 50, attackDmg: 200, bullets: 1,
+        color: '#d35400', desc: 'Lança garrafas por cima dos muros com poça de ácido.'
+    },
+    piper: {
+        id: 'piper', name: 'Piper', price: 250, currency: 'gems',
+        hp: 800, speed: 3.8, type: 'sniper', reload: 65, attackDmg: 550, bullets: 1,
+        color: '#3498db', desc: 'Tiro sniper de longo alcance e altíssimo dano.'
+    },
+    crow: {
+        id: 'crow', name: 'Crow', price: 400, currency: 'gems',
+        hp: 850, speed: 4.6, type: 'poison', reload: 30, attackDmg: 120, bullets: 3,
+        color: '#2c3e50', desc: 'Adagas venenosas em leque e alta velocidade.'
+    },
+    leon: {
+        id: 'leon', name: 'Leon', price: 600, currency: 'gems',
+        hp: 1100, speed: 4.4, type: 'stealth', reload: 40, attackDmg: 220, bullets: 4,
+        color: '#10b981', desc: 'Shurikens rápidos. Super: Fica INVISÍVEL por 5s!'
     }
 };
 
-// --- ESTADO DO JOGO COM SALVAMENTO (LOCALSTORAGE) ---
-let playerState = {
-    nick: "Jogador",
-    trophies: 0,
-    coins: 100,
-    gems: 10,
-    equippedBrawler: "shelly"
+const SKINS = {
+    shelly_star: { id: 'shelly_star', brawler: 'shelly', name: 'Shelly Estelar', price: 50, currency: 'gems', color: '#e74c3c' },
+    colt_outlaw: { id: 'colt_outlaw', brawler: 'colt', name: 'Colt Bandido', price: 80, currency: 'gems', color: '#34495e' },
+    primo_rudo: { id: 'primo_rudo', brawler: 'primo', name: 'El Rudo Primo', price: 100, currency: 'gems', color: '#9b59b6' },
+    crow_white: { id: 'crow_white', brawler: 'crow', name: 'Crow Branco', price: 150, currency: 'gems', color: '#ecf0f1' }
 };
 
-function loadSaveData() {
-    const saved = localStorage.getItem('mini_brawl_save');
-    if (saved) playerState = Object.assign(playerState, JSON.parse(saved));
+// --- MAPA DO PIQUE-GEMA (PAREDES E ARBUSTOS) ---
+const MAP_WALLS = [
+    // Coberturas centrais e laterais
+    {x: 200, y: 150, w: 100, h: 40}, {x: 700, y: 150, w: 100, h: 40},
+    {x: 200, y: 410, w: 100, h: 40}, {x: 700, y: 410, w: 100, h: 40},
+    {x: 440, y: 180, w: 120, h: 30}, {x: 440, y: 390, w: 120, h: 30},
+    {x: 350, y: 270, w: 40, h: 60},  {x: 610, y: 270, w: 40, h: 60}
+];
+
+const MAP_BUSHES = [
+    {x: 80, y: 80, w: 120, h: 100},  {x: 800, y: 80, w: 120, h: 100},
+    {x: 80, y: 420, w: 120, h: 100}, {x: 800, y: 420, w: 120, h: 100},
+    {x: 420, y: 80, w: 160, h: 60},  {x: 420, y: 460, w: 160, h: 60}
+];
+
+// --- SAVE STATE (LOCALSTORAGE) ---
+let userSave = {
+    nick: "Jogador",
+    trophies: 0, coins: 500, gems: 50,
+    unlockedBrawlers: ['shelly'],
+    unlockedSkins: [],
+    equippedBrawler: 'shelly',
+    equippedSkins: {}
+};
+
+function loadSave() {
+    const data = localStorage.getItem('mini_brawl_v3');
+    if (data) userSave = Object.assign(userSave, JSON.parse(data));
     updateMenuUI();
 }
 
-function saveData() {
-    localStorage.setItem('mini_brawl_save', JSON.stringify(playerState));
+function saveGame() {
+    localStorage.setItem('mini_brawl_v3', JSON.stringify(userSave));
     updateMenuUI();
 }
 
 function updateMenuUI() {
-    document.getElementById('menu-trophies').innerText = playerState.trophies;
-    document.getElementById('menu-coins').innerText = playerState.coins;
-    document.getElementById('menu-gems').innerText = playerState.gems;
-}
-
-let activeBrawler = BRAWLERS.shelly;
-let gameInterval = null;
-
-function initUI() {
-    loadSaveData();
-    renderBrawlersGrid();
+    document.getElementById('menu-trophies').innerText = userSave.trophies;
+    document.getElementById('menu-coins').innerText = userSave.coins;
+    document.getElementById('menu-gems').innerText = userSave.gems;
+    const b = BRAWLERS[userSave.equippedBrawler];
+    document.getElementById('equipped-name').innerText = b.name.toUpperCase();
+    
+    const skinId = userSave.equippedSkins[b.id];
+    document.getElementById('equipped-skin-name').innerText = skinId ? SKINS[skinId].name : "Visual Padrão";
     drawPreviewCanvas();
-    setupTouchControls();
 }
 
-function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+// --- INTERFACE DE MODAIS E LOJA ---
+let currentShopTab = 'brawlers';
+
+function openModal(id) {
+    document.getElementById(id).style.display = 'flex';
+    if (id === 'shop-modal') renderShopGrid();
+    if (id === 'brawlers-modal') renderBrawlersGrid();
+}
 function closeModal(id) { document.getElementById(id).style.display = 'none'; }
 
-function renderBrawlersGrid() {
-    const grid = document.getElementById('brawlers-list');
+function switchShopTab(tab) {
+    currentShopTab = tab;
+    document.getElementById('tab-brawlers-btn').className = `tab-btn ${tab==='brawlers'?'active':''}`;
+    document.getElementById('tab-skins-btn').className = `tab-btn ${tab==='skins'?'active':''}`;
+    renderShopGrid();
+}
+
+function renderShopGrid() {
+    const grid = document.getElementById('shop-grid');
     grid.innerHTML = '';
-    for (let key in BRAWLERS) {
-        const b = BRAWLERS[key];
-        const card = document.createElement('div');
-        card.className = `brawler-card ${playerState.equippedBrawler === b.id ? 'selected' : ''}`;
-        card.innerHTML = `
-            <div style="font-size:30px;">🥊</div>
-            <div style="font-size:14px; margin-top:4px;">${b.name}</div>
-            <span class="rarity-tag ${b.rarity}">${b.rarity}</span>
-        `;
-        card.onclick = () => {
-            playerState.equippedBrawler = b.id;
-            activeBrawler = BRAWLERS[b.id];
-            document.getElementById('equipped-brawler-name').innerText = b.name.toUpperCase();
-            saveData();
-            renderBrawlersGrid();
-            drawPreviewCanvas();
-            closeModal('brawlers-modal');
-        };
-        grid.appendChild(card);
+
+    if (currentShopTab === 'brawlers') {
+        for (let key in BRAWLERS) {
+            const b = BRAWLERS[key];
+            const owned = userSave.unlockedBrawlers.includes(b.id);
+            const card = document.createElement('div');
+            card.className = 'card-item';
+            card.innerHTML = `
+                <div style="font-size:32px;">🥊</div>
+                <strong style="color:${b.color}">${b.name}</strong>
+                <p style="font-size:10px; color:#aaa; margin:4px 0;">${b.desc}</p>
+                ${owned ? '<span style="color:#22c55e; font-size:12px;">DESBLOQUEADO</span>' : 
+                `<button class="btn-buy" onclick="buyBrawler('${b.id}')">COMPRAR (${b.currency==='coins'?'🪙':'💎'} ${b.price})</button>`}
+            `;
+            grid.appendChild(card);
+        }
+    } else {
+        for (let key in SKINS) {
+            const s = SKINS[key];
+            const owned = userSave.unlockedSkins.includes(s.id);
+            const card = document.createElement('div');
+            card.className = 'card-item';
+            card.innerHTML = `
+                <div style="font-size:32px;">✨</div>
+                <strong style="color:${s.color}">${s.name}</strong>
+                <p style="font-size:10px; color:#aaa; margin:4px 0;">Brawler: ${BRAWLERS[s.brawler].name}</p>
+                ${owned ? '<span style="color:#22c55e; font-size:12px;">ADQUIRIDA</span>' : 
+                `<button class="btn-buy" onclick="buySkin('${s.id}')">COMPRAR (💎 ${s.price})</button>`}
+            `;
+            grid.appendChild(card);
+        }
     }
 }
 
+function buyBrawler(id) {
+    const b = BRAWLERS[id];
+    if (b.currency === 'coins' && userSave.coins >= b.price) {
+        userSave.coins -= b.price;
+        userSave.unlockedBrawlers.push(id);
+        saveGame(); renderShopGrid();
+    } else if (b.currency === 'gems' && userSave.gems >= b.price) {
+        userSave.gems -= b.price;
+        userSave.unlockedBrawlers.push(id);
+        saveGame(); renderShopGrid();
+    } else { alert("Recursos insuficientes!"); }
+}
+
+function buySkin(id) {
+    const s = SKINS[id];
+    if (userSave.gems >= s.price) {
+        userSave.gems -= s.price;
+        userSave.unlockedSkins.push(id);
+        userSave.equippedSkins[s.brawler] = id;
+        saveGame(); renderShopGrid();
+    } else { alert("Gemas insuficientes!"); }
+}
+
+function renderBrawlersGrid() {
+    const grid = document.getElementById('brawlers-grid');
+    grid.innerHTML = '';
+    userSave.unlockedBrawlers.forEach(bId => {
+        const b = BRAWLERS[bId];
+        const isEquipped = userSave.equippedBrawler === bId;
+        const card = document.createElement('div');
+        card.className = `card-item ${isEquipped?'selected':''}`;
+        card.innerHTML = `
+            <div style="font-size:32px;">🥊</div>
+            <strong style="color:${b.color}">${b.name}</strong>
+            <button class="btn-buy ${isEquipped?'disabled':''}" onclick="equipBrawler('${bId}')">
+                ${isEquipped ? 'EQUIPADO' : 'EQUIPAR'}
+            </button>
+        `;
+        grid.appendChild(card);
+    });
+}
+
+function equipBrawler(id) {
+    userSave.equippedBrawler = id;
+    saveGame(); renderBrawlersGrid(); closeModal('brawlers-modal');
+}
+
 function drawPreviewCanvas() {
-    const cvs = document.getElementById('brawler-preview-canvas');
+    const cvs = document.getElementById('preview-canvas');
     const ctx = cvs.getContext('2d');
-    cvs.width = 160; cvs.height = 160;
-    ctx.clearRect(0, 0, 160, 160);
+    cvs.width = 170; cvs.height = 170;
+    ctx.clearRect(0, 0, 170, 170);
+
+    const b = BRAWLERS[userSave.equippedBrawler];
+    const skinId = userSave.equippedSkins[b.id];
+    const renderColor = skinId ? SKINS[skinId].color : b.color;
 
     ctx.save();
-    ctx.translate(80, 80);
-    ctx.fillStyle = activeBrawler.color;
-    ctx.beginPath(); ctx.arc(0, 0, 35, 0, Math.PI * 2); ctx.fill();
+    ctx.translate(85, 85);
+    ctx.fillStyle = renderColor;
+    ctx.beginPath(); ctx.arc(0, 0, 40, 0, Math.PI * 2); ctx.fill();
     ctx.lineWidth = 4; ctx.strokeStyle = '#000'; ctx.stroke();
     ctx.restore();
 }
 
-// --- CONTROLES TOUCH E JOYSTICK VIRTUAL ---
+// --- CONTROLES DE TOQUE MULTI-TOUCH INTELIGENTES (POINTER EVENTS) ---
 let joystickVec = { x: 0, y: 0 };
-let isTouchDevice = false;
+let activePointerId = null;
 
-function setupTouchControls() {
-    const area = document.getElementById('joystick-area');
-    const knob = document.getElementById('joystick-knob');
-    let touchId = null;
-    let basePos = { x: 0, y: 0 };
+function setupTouchEvents() {
+    const zone = document.getElementById('joystick-zone');
+    const stick = document.getElementById('joystick-stick');
+    let center = { x: 0, y: 0 };
 
-    area.addEventListener('touchstart', (e) => {
-        isTouchDevice = true;
-        const touch = e.changedTouches[0];
-        touchId = touch.identifier;
-        const rect = area.getBoundingClientRect();
-        basePos = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+    zone.addEventListener('pointerdown', e => {
+        activePointerId = e.pointerId;
+        const rect = zone.getBoundingClientRect();
+        center = { x: rect.left + rect.width / 2, y: rect.top + rect.height / 2 };
+        updateStick(e);
     });
 
-    area.addEventListener('touchmove', (e) => {
-        if (touchId === null) return;
-        for (let touch of e.changedTouches) {
-            if (touch.identifier === touchId) {
-                let dx = touch.clientX - basePos.x;
-                let dy = touch.clientY - basePos.y;
-                let dist = Math.hypot(dx, dy);
-                let maxDist = 45;
-
-                if (dist > maxDist) {
-                    dx = (dx / dist) * maxDist;
-                    dy = (dy / dist) * maxDist;
-                }
-
-                knob.style.transform = `translate(${dx}px, ${dy}px)`;
-                joystickVec.x = dx / maxDist;
-                joystickVec.y = dy / maxDist;
-            }
-        }
+    window.addEventListener('pointermove', e => {
+        if (e.pointerId === activePointerId) updateStick(e);
     });
 
-    const resetJoystick = (e) => {
-        for (let touch of e.changedTouches) {
-            if (touch.identifier === touchId) {
-                touchId = null;
-                knob.style.transform = `translate(0px, 0px)`;
-                joystickVec = { x: 0, y: 0 };
-            }
+    const endTouch = e => {
+        if (e.pointerId === activePointerId) {
+            activePointerId = null;
+            stick.style.transform = `translate(0px, 0px)`;
+            joystickVec = { x: 0, y: 0 };
         }
     };
+    window.addEventListener('pointerup', endTouch);
+    window.addEventListener('pointercancel', endTouch);
 
-    area.addEventListener('touchend', resetJoystick);
-    area.addEventListener('touchcancel', resetJoystick);
+    function updateStick(e) {
+        let dx = e.clientX - center.x;
+        let dy = e.clientY - center.y;
+        let dist = Math.hypot(dx, dy);
+        let maxDist = 40;
+        if (dist > maxDist) {
+            dx = (dx / dist) * maxDist;
+            dy = (dy / dist) * maxDist;
+        }
+        stick.style.transform = `translate(${dx}px, ${dy}px)`;
+        joystickVec = { x: dx / maxDist, y: dy / maxDist };
+    }
 
-    // Botões de Ataque e Super
-    document.getElementById('btn-attack').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        triggerAttack(false);
+    document.getElementById('btn-shoot').addEventListener('pointerdown', e => {
+        e.preventDefault(); fireAttack(false);
     });
-
-    document.getElementById('btn-super').addEventListener('touchstart', (e) => {
-        e.preventDefault();
-        triggerAttack(true);
+    document.getElementById('btn-super-touch').addEventListener('pointerdown', e => {
+        e.preventDefault(); fireAttack(true);
     });
 }
 
-// --- ENGINE DO JOGO ---
-let canvas, ctx;
+// --- ENGINE PRINCIPAL DE JOGO ---
+let canvas, ctx, gameLoopInterval;
 let keys = {};
 let mousePos = { x: 0, y: 0 };
-let gameState = { players: [], bullets: [] };
+let gameState = {
+    players: [], bullets: [], gems: [], acidPools: [],
+    gemSpawnTimer: 0, countdown: 15, countdownTeam: null
+};
 
 function startGame() {
     document.getElementById('main-menu').style.display = 'none';
@@ -617,17 +621,25 @@ function startGame() {
     ctx = canvas.getContext('2d');
     canvas.style.display = 'block';
     document.getElementById('game-hud').style.display = 'flex';
-    document.getElementById('touch-controls').style.display = 'block';
+    document.getElementById('touch-overlay').style.display = 'block';
 
-    // Cria jogador Principal
-    gameState.players = [createPlayer(1, playerState.nick, activeBrawler, 200, 300, false)];
+    gameState.players = [];
+    gameState.bullets = [];
+    gameState.gems = [];
+    gameState.acidPools = [];
+    gameState.countdown = 15;
+    gameState.countdownTeam = null;
 
-    // Cria 5 Bots Inimigos
-    for (let i = 2; i <= 6; i++) {
-        const bKeys = Object.keys(BRAWLERS);
-        const randomBrawler = BRAWLERS[bKeys[Math.floor(Math.random() * bKeys.length)]];
-        gameState.players.push(createPlayer(i, `Inimigo ${i-1}`, randomBrawler, Math.random()*700+150, Math.random()*400+100, true));
-    }
+    // Time Azul (Player + 2 Bots)
+    const pBrawler = BRAWLERS[userSave.equippedBrawler];
+    gameState.players.push(createBrawlerObj(1, userSave.nick, pBrawler, 'blue', 150, 300, false));
+    gameState.players.push(createBrawlerObj(2, "Bot Azul 1", BRAWLERS.colt, 'blue', 150, 150, true));
+    gameState.players.push(createBrawlerObj(3, "Bot Azul 2", BRAWLERS.primo, 'blue', 150, 450, true));
+
+    // Time Vermelho (3 Bots)
+    gameState.players.push(createBrawlerObj(4, "Bot Vermelho 1", BRAWLERS.crow, 'red', 850, 150, true));
+    gameState.players.push(createBrawlerObj(5, "Bot Vermelho 2", BRAWLERS.barley, 'red', 850, 300, true));
+    gameState.players.push(createBrawlerObj(6, "Bot Vermelho 3", BRAWLERS.leon, 'red', 850, 450, true));
 
     window.addEventListener('keydown', e => keys[e.key.toLowerCase()] = true);
     window.addEventListener('keyup', e => keys[e.key.toLowerCase()] = false);
@@ -636,145 +648,292 @@ function startGame() {
         mousePos.x = e.clientX - rect.left;
         mousePos.y = e.clientY - rect.top;
     });
-    canvas.addEventListener('mousedown', () => triggerAttack(false));
+    canvas.addEventListener('mousedown', () => fireAttack(false));
 
-    if (gameInterval) clearInterval(gameInterval);
-    gameInterval = setInterval(gameLoop, 1000 / 60);
+    if (gameLoopInterval) clearInterval(gameLoopInterval);
+    gameLoopInterval = setInterval(gameLoop, 1000 / 60);
 }
 
-function createPlayer(id, name, brawlerConfig, x, y, isBot) {
+function createBrawlerObj(id, name, brawlerCfg, team, x, y, isBot) {
     return {
-        id, name, brawler: brawlerConfig,
-        x, y, hp: brawlerConfig.hp, maxHp: brawlerConfig.hp,
-        ammo: 3, reloadTimer: 0, superGauge: 0, angle: 0, isBot
+        id, name, brawler: brawlerCfg, team, x, y, spawnX: x, spawnY: y,
+        hp: brawlerCfg.hp, maxHp: brawlerCfg.hp,
+        ammo: 3, reloadTimer: 0, superGauge: 0, angle: 0,
+        gems: 0, isBot, isStealth: false, stealthTimer: 0, poisonTicks: 0,
+        respawnTimer: 0
     };
 }
 
-function getClosestEnemy(p) {
-    let closest = null;
-    let minDist = 9999;
-    gameState.players.forEach(other => {
-        if (other.id !== p.id && other.hp > 0) {
-            let dist = Math.hypot(other.x - p.x, other.y - p.y);
-            if (dist < minDist) {
-                minDist = dist;
-                closest = other;
-            }
-        }
-    });
-    return closest;
+function checkWallCollision(x, y, radius) {
+    return MAP_WALLS.some(w => x + radius > w.x && x - radius < w.x + w.w && y + radius > w.y && y - radius < w.y + w.h);
 }
 
-function triggerAttack(isSuper) {
+function checkBush(p) {
+    return MAP_BUSHES.some(b => p.x > b.x && p.x < b.x + b.w && p.y > b.y && p.y < b.y + b.h);
+}
+
+function fireAttack(isSuper) {
     const p = gameState.players[0];
     if (!p || p.hp <= 0) return;
 
     if (isSuper && p.superGauge < 100) return;
     if (!isSuper && p.ammo < 1) return;
 
-    // Auto-Mira para telas Touch ou Mouse
-    let targetAngle = p.angle;
-    if (isTouchDevice) {
-        const closest = getClosestEnemy(p);
-        if (closest) targetAngle = Math.atan2(closest.y - p.y, closest.x - p.x);
+    // Auto-Mira em telas Touch
+    let aimAngle = p.angle;
+    let closestEnemy = null, minDist = 9999;
+    gameState.players.forEach(other => {
+        if (other.team !== p.team && other.hp > 0 && !other.isStealth) {
+            let dist = Math.hypot(other.x - p.x, other.y - p.y);
+            if (dist < minDist) { minDist = dist; closestEnemy = other; }
+        }
+    });
+
+    if (closestEnemy && Math.abs(joystickVec.x) < 0.1) {
+        aimAngle = Math.atan2(closestEnemy.y - p.y, closestEnemy.x - p.x);
     }
 
     if (isSuper) {
         p.superGauge = 0;
-        document.getElementById('btn-super').classList.remove('ready');
-        // Super Disparo Triplo Forte
-        for (let i = -1; i <= 1; i++) {
-            gameState.bullets.push({
-                x: p.x, y: p.y,
-                vx: Math.cos(targetAngle + i*0.2) * 14,
-                vy: Math.sin(targetAngle + i*0.2) * 14,
-                dmg: p.brawler.superDmg, ownerId: p.id, life: 30, isSuper: true
-            });
-        }
+        document.getElementById('btn-super-touch').classList.remove('ready');
+        executeSuper(p, aimAngle);
     } else {
         p.ammo--;
+        executeNormalAttack(p, aimAngle);
+    }
+}
+
+function executeNormalAttack(p, angle) {
+    const b = p.brawler;
+    p.isStealth = false; // Atacar quebra invisibilidade
+
+    if (b.type === 'spread') { // Shelly
+        for (let i = -2; i <= 2; i++) {
+            gameState.bullets.push({
+                x: p.x, y: p.y, vx: Math.cos(angle + i*0.12) * 11, vy: Math.sin(angle + i*0.12) * 11,
+                dmg: b.attackDmg, ownerId: p.id, team: p.team, life: 18, type: 'bullet'
+            });
+        }
+    } else if (b.type === 'salvo') { // Colt
+        for (let i = 0; i < 4; i++) {
+            setTimeout(() => {
+                if (p.hp > 0) gameState.bullets.push({
+                    x: p.x, y: p.y, vx: Math.cos(angle) * 14, vy: Math.sin(angle) * 14,
+                    dmg: b.attackDmg, ownerId: p.id, team: p.team, life: 25, type: 'bullet'
+                });
+            }, i * 60);
+        }
+    } else if (b.type === 'thrower') { // Barley
+        let targetX = p.x + Math.cos(angle) * 180;
+        let targetY = p.y + Math.sin(angle) * 180;
         gameState.bullets.push({
-            x: p.x, y: p.y,
-            vx: Math.cos(targetAngle) * 11,
-            vy: Math.sin(targetAngle) * 11,
-            dmg: p.brawler.attackDmg, ownerId: p.id, life: 25, isSuper: false
+            x: p.x, y: p.y, targetX, targetY, vx: Math.cos(angle)*8, vy: Math.sin(angle)*8,
+            dmg: b.attackDmg, ownerId: p.id, team: p.team, life: 22, type: 'lob'
         });
+    } else if (b.type === 'poison') { // Crow
+        for (let i = -1; i <= 1; i++) {
+            gameState.bullets.push({
+                x: p.x, y: p.y, vx: Math.cos(angle + i*0.18) * 12, vy: Math.sin(angle + i*0.18) * 12,
+                dmg: b.attackDmg, ownerId: p.id, team: p.team, life: 22, type: 'poison'
+            });
+        }
+    } else { // Padrão / Piper / Leon / Primo
+        gameState.bullets.push({
+            x: p.x, y: p.y, vx: Math.cos(angle) * 13, vy: Math.sin(angle) * 13,
+            dmg: b.attackDmg, ownerId: p.id, team: p.team, life: 25, type: 'bullet'
+        });
+    }
+}
+
+function executeSuper(p, angle) {
+    const b = p.brawler;
+    if (b.id === 'shelly') {
+        // Super Blast destrói paredes
+        for (let i = -3; i <= 3; i++) {
+            gameState.bullets.push({
+                x: p.x, y: p.y, vx: Math.cos(angle + i*0.15) * 15, vy: Math.sin(angle + i*0.15) * 15,
+                dmg: 350, ownerId: p.id, team: p.team, life: 22, type: 'super_shelly'
+            });
+        }
+    } else if (b.id === 'primo') {
+        // Pulo do Primo
+        p.x += Math.cos(angle) * 200;
+        p.y += Math.sin(angle) * 200;
+        // Dano de impacto em área
+        gameState.players.forEach(other => {
+            if (other.team !== p.team && Math.hypot(other.x - p.x, other.y - p.y) < 90) {
+                other.hp -= 500;
+            }
+        });
+    } else if (b.id === 'leon') {
+        p.isStealth = true;
+        p.stealthTimer = 300; // 5 Segundos
+    } else { // Tiros genéricos de Super
+        for (let i = -2; i <= 2; i++) {
+            gameState.bullets.push({
+                x: p.x, y: p.y, vx: Math.cos(angle + i*0.1) * 14, vy: Math.sin(angle + i*0.1) * 14,
+                dmg: 300, ownerId: p.id, team: p.team, life: 30, type: 'bullet'
+            });
+        }
     }
 }
 
 function updateGame() {
     const p1 = gameState.players[0];
 
+    // Controles Player 1
     if (p1 && p1.hp > 0) {
-        // Movimento (Joystick ou WASD)
+        let moveX = 0, moveY = 0;
         if (Math.abs(joystickVec.x) > 0.1 || Math.abs(joystickVec.y) > 0.1) {
-            p1.x += joystickVec.x * p1.brawler.speed;
-            p1.y += joystickVec.y * p1.brawler.speed;
+            moveX = joystickVec.x * p1.brawler.speed;
+            moveY = joystickVec.y * p1.brawler.speed;
             p1.angle = Math.atan2(joystickVec.y, joystickVec.x);
         } else {
-            if (keys['w']) p1.y -= p1.brawler.speed;
-            if (keys['s']) p1.y += p1.brawler.speed;
-            if (keys['a']) p1.x -= p1.brawler.speed;
-            if (keys['d']) p1.x += p1.brawler.speed;
-            if (!isTouchDevice) p1.angle = Math.atan2(mousePos.y - p1.y, mousePos.x - p1.x);
+            if (keys['w']) moveY -= p1.brawler.speed;
+            if (keys['s']) moveY += p1.brawler.speed;
+            if (keys['a']) moveX -= p1.brawler.speed;
+            if (keys['d']) moveX += p1.brawler.speed;
+            p1.angle = Math.atan2(mousePos.y - p1.y, mousePos.x - p1.x);
         }
+
+        if (!checkWallCollision(p1.x + moveX, p1.y, 18)) p1.x += moveX;
+        if (!checkWallCollision(p1.x, p1.y + moveY, 18)) p1.y += moveY;
+    }
+
+    // Mina de Gemas
+    gameState.gemSpawnTimer++;
+    if (gameState.gemSpawnTimer >= 300 && gameState.gems.length < 12) { // Cada 5s
+        gameState.gemSpawnTimer = 0;
+        gameState.gems.push({ x: 500 + (Math.random()*40-20), y: 300 + (Math.random()*40-20) });
     }
 
     // Atualização de Jogadores e Bots
-    let aliveCount = 0;
-    gameState.players.forEach(p => {
-        if (p.hp <= 0) return;
-        aliveCount++;
+    let blueGems = 0, redGems = 0;
 
-        // Recarga Munição
+    gameState.players.forEach(p => {
+        if (p.hp <= 0) {
+            p.respawnTimer++;
+            if (p.respawnTimer >= 240) { // Respawn após 4 segundos
+                p.hp = p.maxHp; p.x = p.spawnX; p.y = p.spawnY;
+                p.gems = 0; p.respawnTimer = 0;
+            }
+            return;
+        }
+
+        if (p.team === 'blue') blueGems += p.gems; else redGems += p.gems;
+
+        // Stealth
+        if (p.isStealth) {
+            p.stealthTimer--;
+            if (p.stealthTimer <= 0) p.isStealth = false;
+        }
+
+        // Poison
+        if (p.poisonTicks > 0 && Math.random() < 0.05) {
+            p.hp -= 20; p.poisonTicks--;
+        }
+
+        // Recarga
         if (p.ammo < 3) {
             p.reloadTimer++;
-            if (p.reloadTimer >= p.brawler.reloadSpeed) {
-                p.ammo++;
-                p.reloadTimer = 0;
+            if (p.reloadTimer >= p.brawler.reload) { p.ammo++; p.reloadTimer = 0; }
+        }
+
+        // Coleta de Gemas
+        for (let i = gameState.gems.length - 1; i >= 0; i--) {
+            let g = gameState.gems[i];
+            if (Math.hypot(p.x - g.x, p.y - g.y) < 25) {
+                p.gems++;
+                gameState.gems.splice(i, 1);
             }
         }
 
-        // IA dos Bots
+        // IA Inteligente dos Bots
         if (p.isBot) {
-            const closest = getClosestEnemy(p);
-            if (closest) {
-                p.angle = Math.atan2(closest.y - p.y, closest.x - p.x);
-                if (Math.hypot(closest.x - p.x, closest.y - p.y) > 120) {
-                    p.x += Math.cos(p.angle) * (p.brawler.speed * 0.5);
-                    p.y += Math.sin(p.angle) * (p.brawler.speed * 0.5);
-                } else if (Math.random() < 0.02 && p.ammo >= 1) {
-                    p.ammo--;
-                    gameState.bullets.push({
-                        x: p.x, y: p.y,
-                        vx: Math.cos(p.angle) * 10, vy: Math.sin(p.angle) * 10,
-                        dmg: p.brawler.attackDmg, ownerId: p.id, life: 25
-                    });
-                }
+            let targetX = 500, targetY = 300; // Foco na Mina
+            // Procura gemas no chão
+            if (gameState.gems.length > 0) {
+                targetX = gameState.gems[0].x; targetY = gameState.gems[0].y;
             }
+            let angle = Math.atan2(targetY - p.y, targetX - p.x);
+            p.angle = angle;
+            let vx = Math.cos(angle) * (p.brawler.speed * 0.6);
+            let vy = Math.sin(angle) * (p.brawler.speed * 0.6);
+            if (!checkWallCollision(p.x + vx, p.y + vy, 18)) {
+                p.x += vx; p.y += vy;
+            }
+
+            // Ataca inimigos próximos
+            gameState.players.forEach(other => {
+                if (other.team !== p.team && other.hp > 0 && !other.isStealth) {
+                    if (Math.hypot(other.x - p.x, other.y - p.y) < 180 && p.ammo >= 1 && Math.random() < 0.03) {
+                        p.ammo--;
+                        executeNormalAttack(p, Math.atan2(other.y - p.y, other.x - p.x));
+                    }
+                }
+            });
         }
     });
 
-    document.getElementById('hud-alive').innerText = aliveCount;
+    document.getElementById('score-blue').innerText = blueGems;
+    document.getElementById('score-red').innerText = redGems;
+
+    // Regra de Vitória (10 Gemas)
+    if (blueGems >= 10 || redGems >= 10) {
+        let winningTeam = blueGems >= 10 ? 'blue' : 'red';
+        document.getElementById('countdown-box').style.display = 'block';
+        if (gameState.countdownTeam !== winningTeam) {
+            gameState.countdownTeam = winningTeam;
+            gameState.countdown = 15;
+        }
+        if (Math.random() < 0.02) gameState.countdown--;
+        document.getElementById('count-sec').innerText = gameState.countdown;
+
+        if (gameState.countdown <= 0) {
+            finishMatch(gameState.countdownTeam === 'blue');
+        }
+    } else {
+        document.getElementById('countdown-box').style.display = 'none';
+        gameState.countdownTeam = null;
+    }
 
     // Atualiza Balas
     for (let i = gameState.bullets.length - 1; i >= 0; i--) {
         let b = gameState.bullets[i];
-        b.x += b.vx; b.y += b.vy;
-        b.life--;
+        b.x += b.vx; b.y += b.vy; b.life--;
 
+        // Destrói muro com Super
+        if (b.type === 'super_shelly') {
+            MAP_WALLS.forEach((w, wIdx) => {
+                if (b.x > w.x && b.x < w.x + w.w && b.y > w.y && b.y < w.y + w.h) {
+                    MAP_WALLS.splice(wIdx, 1);
+                }
+            });
+        } else if (checkWallCollision(b.x, b.y, 4) && b.type !== 'lob') {
+            b.life = 0;
+        }
+
+        // Colisão com Jogadores
         gameState.players.forEach(p => {
-            if (p.id !== b.ownerId && p.hp > 0) {
+            if (p.team !== b.team && p.hp > 0) {
                 if (Math.hypot(p.x - b.x, p.y - b.y) < 22) {
                     p.hp -= b.dmg;
                     b.life = 0;
 
-                    // Carrega o Super do Atacante
-                    if (b.ownerId === 1 && p1) {
-                        p1.superGauge = Math.min(100, p1.superGauge + 25);
-                        if (p1.superGauge >= 100) {
-                            document.getElementById('btn-super').classList.add('ready');
+                    if (b.type === 'poison') p.poisonTicks = 5;
+
+                    // Se morreu, derruba todas as gemas
+                    if (p.hp <= 0 && p.gems > 0) {
+                        for (let g = 0; g < p.gems; g++) {
+                            gameState.gems.push({ x: p.x + (Math.random()*30-15), y: p.y + (Math.random()*30-15) });
                         }
+                        p.gems = 0;
+                    }
+
+                    // Carrega Super
+                    if (b.ownerId === 1 && p1) {
+                        p1.superGauge = Math.min(100, p1.superGauge + 20);
+                        if (p1.superGauge >= 100) document.getElementById('btn-super-touch').classList.add('ready');
                     }
                 }
             }
@@ -782,34 +941,27 @@ function updateGame() {
 
         if (b.life <= 0) gameState.bullets.splice(i, 1);
     }
-
-    // Verificação de Fim de Jogo
-    if (p1.hp <= 0 && gameInterval) {
-        finishGame(false);
-    } else if (aliveCount === 1 && p1.hp > 0 && gameInterval) {
-        finishGame(true);
-    }
 }
 
-function finishGame(isVictory) {
-    clearInterval(gameInterval);
-    gameInterval = null;
+function finishMatch(isVictory) {
+    clearInterval(gameLoopInterval);
+    gameLoopInterval = null;
 
-    let trophiesChange = isVictory ? 8 : -4;
-    let gemsChange = isVictory ? 5 : 0;
-    let coinsChange = isVictory ? 25 : 5;
+    let trophiesDelta = isVictory ? 8 : -4;
+    let coinsDelta = isVictory ? 30 : 10;
+    let gemsDelta = isVictory ? 5 : 0;
 
-    playerState.trophies = Math.max(0, playerState.trophies + trophiesChange);
-    playerState.gems += gemsChange;
-    playerState.coins += coinsChange;
-    saveData();
+    userSave.trophies = Math.max(0, userSave.trophies + trophiesDelta);
+    userSave.coins += coinsDelta;
+    userSave.gems += gemsDelta;
+    saveGame();
 
     document.getElementById('end-title').innerText = isVictory ? "VITÓRIA!" : "DERROTA!";
-    document.getElementById('end-title').style.color = isVictory ? "#2ecc71" : "#e74c3c";
+    document.getElementById('end-title').style.color = isVictory ? "#22c55e" : "#ef4444";
     document.getElementById('end-icon').innerText = isVictory ? "🏆" : "💀";
-    document.getElementById('reward-trophies').innerText = (trophiesChange >= 0 ? "+" : "") + trophiesChange;
-    document.getElementById('reward-gems').innerText = "+" + gemsChange;
-    document.getElementById('reward-coins').innerText = "+" + coinsChange;
+    document.getElementById('reward-trophies').innerText = (trophiesDelta >= 0 ? "+" : "") + trophiesDelta;
+    document.getElementById('reward-coins').innerText = "+" + coinsDelta;
+    document.getElementById('reward-gems').innerText = "+" + gemsDelta;
 
     openModal('game-over-modal');
 }
@@ -817,28 +969,65 @@ function finishGame(isVictory) {
 function drawGame() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-    // Desenha Balas
+    // Desenha Chão do Arena
+    ctx.fillStyle = '#27ae60'; ctx.fillRect(0, 0, 1000, 600);
+
+    // Desenha Arbustos
+    ctx.fillStyle = 'rgba(34, 197, 94, 0.7)';
+    MAP_BUSHES.forEach(b => ctx.fillRect(b.x, b.y, b.w, b.h));
+
+    // Desenha Paredes
+    ctx.fillStyle = '#78350f'; ctx.strokeStyle = '#000'; ctx.lineWidth = 3;
+    MAP_WALLS.forEach(w => {
+        ctx.fillRect(w.x, w.y, w.w, w.h);
+        ctx.strokeRect(w.x, w.y, w.w, w.h);
+    });
+
+    // Mina de Gemas Central
+    ctx.fillStyle = '#475569'; ctx.beginPath(); ctx.arc(500, 300, 25, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = '#a855f7'; ctx.beginPath(); ctx.arc(500, 300, 12, 0, Math.PI*2); ctx.fill();
+
+    // Desenha Gemas no chão
+    gameState.gems.forEach(g => {
+        ctx.fillStyle = '#a855f7'; ctx.beginPath(); ctx.arc(g.x, g.y, 8, 0, Math.PI*2); ctx.fill();
+        ctx.strokeStyle = '#fff'; ctx.lineWidth = 2; ctx.stroke();
+    });
+
+    // Desenha Projéteis
     gameState.bullets.forEach(b => {
-        ctx.fillStyle = b.isSuper ? '#f1c40f' : '#e74c3c';
-        ctx.beginPath(); ctx.arc(b.x, b.y, b.isSuper ? 8 : 5, 0, Math.PI * 2); ctx.fill();
+        ctx.fillStyle = b.type === 'poison' ? '#22c55e' : '#f59e0b';
+        ctx.beginPath(); ctx.arc(b.x, b.y, 6, 0, Math.PI*2); ctx.fill();
     });
 
     // Desenha Jogadores
     gameState.players.forEach(p => {
         if (p.hp <= 0) return;
 
+        // Se estiver no mato e for inimigo, não desenha!
+        let inBush = checkBush(p);
+        if (inBush && p.team !== 'blue' && !p.isBot) return;
+
+        ctx.save();
+        ctx.globalAlpha = p.isStealth ? 0.3 : (inBush ? 0.6 : 1.0);
+
+        // Anel de Time no Chão
+        ctx.strokeStyle = p.team === 'blue' ? '#3b82f6' : '#ef4444';
+        ctx.lineWidth = 4; ctx.beginPath(); ctx.arc(p.x, p.y, 22, 0, Math.PI*2); ctx.stroke();
+
         // Corpo
-        ctx.fillStyle = p.brawler.color;
-        ctx.beginPath(); ctx.arc(p.x, p.y, 20, 0, Math.PI * 2); ctx.fill();
-        ctx.lineWidth = 3; ctx.strokeStyle = '#000'; ctx.stroke();
+        const skinId = userSave.equippedSkins[p.brawler.id];
+        ctx.fillStyle = (p.id === 1 && skinId) ? SKINS[skinId].color : p.brawler.color;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 18, 0, Math.PI*2); ctx.fill();
 
-        // Nome
+        // Nome e Gemas
         ctx.fillStyle = '#fff'; ctx.font = '12px Lilita One'; ctx.textAlign = 'center';
-        ctx.fillText(p.name, p.x, p.y - 28);
+        ctx.fillText(`${p.name} 💎${p.gems}`, p.x, p.y - 28);
 
-        // Barra de HP
-        ctx.fillStyle = '#c0392b'; ctx.fillRect(p.x - 20, p.y - 22, 40, 5);
-        ctx.fillStyle = '#2ecc71'; ctx.fillRect(p.x - 20, p.y - 22, Math.max(0, (p.hp / p.maxHp) * 40), 5);
+        // Barra de Vida
+        ctx.fillStyle = '#b91c1c'; ctx.fillRect(p.x - 20, p.y - 22, 40, 5);
+        ctx.fillStyle = '#22c55e'; ctx.fillRect(p.x - 20, p.y - 22, Math.max(0, (p.hp / p.maxHp) * 40), 5);
+
+        ctx.restore();
     });
 }
 
@@ -848,14 +1037,17 @@ function gameLoop() {
 }
 
 function exitGame() {
-    if (gameInterval) clearInterval(gameInterval);
+    if (gameLoopInterval) clearInterval(gameLoopInterval);
     canvas.style.display = 'none';
     document.getElementById('game-hud').style.display = 'none';
-    document.getElementById('touch-controls').style.display = 'none';
+    document.getElementById('touch-overlay').style.display = 'none';
     document.getElementById('main-menu').style.display = 'flex';
 }
 
-window.onload = initUI;
+window.onload = () => {
+    loadSave();
+    setupTouchEvents();
+};
 </script>
 </body>
 </html>
